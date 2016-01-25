@@ -1,5 +1,6 @@
-## Put comments here that give an overall description of what your
-## functions do
+## makeCacheMatrix this function creates a special "matrix" object that can cache its inverse
+## and creates and returns a list of functions: set(), setMatrix(), getMatrix(), getInverse(), all described below
+## used by cacheSolve to get or set the inverted matrix in cache, has error messages set.
 
 makeCacheMatrix <- function(x = matrix()) {
         # stores the cached value
@@ -50,19 +51,19 @@ cacheSolve <- function(x, ...) {
         matrix <- x$get()
 
       # make sure matrix is square and invertible
-      # if not, handle exception cleanly
+      # if not, handle exception using tryCatch()
         tryCatch( {
                 # set and return inverse of matrix
                 cache <- solve(matrix, ...)
         },
         error = function(e) {
-                message("Error:")
+                message("Error")
                 message(e)
 
                 return(NA)
         },
         warning = function(e) {
-                message("Warning:")
+                message("Warning occured")
                 message(e)
 
                 return(NA)
